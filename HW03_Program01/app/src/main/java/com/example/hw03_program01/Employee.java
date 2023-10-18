@@ -4,29 +4,37 @@ import java.io.Serializable;
 
 public class Employee implements Serializable
 {
+    //==========ORDER: Username, First Name, Last Name, Password, Email, Age ===========
+    private String uname;
     private String fname;
     private String lname;
-    private String uname;
     private String password;
     private String email;
-    private int age;
+    //Can always cast to an int when needed
+    private String age;
 
     public Employee()
     {
 
     }
 
-    public Employee(String f, String l, String u, String p, String e, int a)
+    public Employee(String u, String f, String l, String p, String e, String a)
     {
+        //==========ORDER: Username, First Name, Last Name, Password, Email, Age ===========
+        uname = u;
         fname = f;
         lname = l;
-        uname = u;
         password = p;
         email = e;
         age = a;
     }
 
     //=====Getters=====
+    public String getUname()
+    {
+        return uname;
+    }
+
     public String getFname()
     {
         return fname;
@@ -35,11 +43,6 @@ public class Employee implements Serializable
     public String getLname()
     {
         return lname;
-    }
-
-    public String getUname()
-    {
-        return uname;
     }
 
     public String getPassword()
@@ -52,13 +55,17 @@ public class Employee implements Serializable
         return email;
     }
 
-    public int getAge()
+    public String getAge()
     {
         return age;
     }
     //=====End Getters=====
 
     //=====Setters=====
+    public void setUname(String u)
+    {
+        uname = u;
+    }
     public void setFname(String f)
     {
         fname = f;
@@ -67,11 +74,6 @@ public class Employee implements Serializable
     public void setLname(String l)
     {
         lname = l;
-    }
-
-    public void setUname(String u)
-    {
-        uname = u;
     }
 
     public void setPassword(String p)
@@ -84,7 +86,7 @@ public class Employee implements Serializable
         email = e;
     }
 
-    public void setAge(int a)
+    public void setAge(String a)
     {
         age = a;
     }
