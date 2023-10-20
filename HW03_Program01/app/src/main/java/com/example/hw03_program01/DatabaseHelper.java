@@ -73,30 +73,33 @@ public class DatabaseHelper extends SQLiteOpenHelper
         //Temp arraylist to store everything that the table returns
         ArrayList<Employee> listEmployees = new ArrayList<Employee>();
 
-        String selectQuery = "SELECT * FROM " + TABLE_NAME + " ORDER BY username;";
+        //String selectQuery = "SELECT * FROM " + TABLE_NAME + " ORDER BY username;";
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
 
         //Get readable
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         //==========ORDER: Username, First Name, Last Name, Password, Email, Age ===========
-        String uname;
-        String fname;
-        String lname;
-        String password;
-        String email;
-        String age;
+        String u;
+        String f;
+        String l;
+        String p;
+        String e;
+        String a;
 
         if (cursor.moveToFirst())
         {
             do
             {
-                uname = cursor.getString(cursor.getColumnIndex("username"));
-                fname = cursor.getString(cursor.getColumnIndex("firstname"));
-                lname = cursor.getString(cursor.getColumnIndex("lastname"));
-                password = cursor.getString(cursor.getColumnIndex("password"));
-                email = cursor.getString(cursor.getColumnIndex("email"));
-                age = cursor.getString(cursor.getColumnIndex("age"));
+                u = cursor.getString(cursor.getColumnIndex("username"));
+                f = cursor.getString(cursor.getColumnIndex("firstname"));
+                l = cursor.getString(cursor.getColumnIndex("lastname"));
+                p = cursor.getString(cursor.getColumnIndex("password"));
+                e = cursor.getString(cursor.getColumnIndex("email"));
+                a = cursor.getString(cursor.getColumnIndex("age"));
+
+                listEmployees.add(new Employee(u, f, l, p, e, a));
             }
             while (cursor.moveToNext());
         }
@@ -112,6 +115,16 @@ public class DatabaseHelper extends SQLiteOpenHelper
         SQLiteDatabase db = this.getWritableDatabase();
         //==========ORDER: Username, First Name, Last Name, Password, Email, Age ===========
         db.execSQL("INSERT INTO " + TABLE_NAME + " VALUES ('" + e.getUname() + "','" + e.getFname() + "','" + e.getLname() + "','" + e.getPassword() + "','" + e.getEmail() + "','" + e.getAge() + "');");
+        //db.execSQL("INSERT INTO " + TABLE_NAME + " VALUES ('" + u.getUname() + "','" + u.getFname() + "','" + u.getLname() + "');");
+        db.close();
+    }
+
+    public void deleteEmployee(String uname)
+    {
+        //Get writable
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE username = '" + uname + "';");
         db.close();
     }
 

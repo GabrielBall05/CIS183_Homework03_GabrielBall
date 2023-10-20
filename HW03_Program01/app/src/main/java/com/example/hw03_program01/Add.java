@@ -69,7 +69,7 @@ public class Add extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Log.d("Button Pressed: ", "Add Button Press (Add Intent)");
+                Log.d("Button Pressed: ", "Add Button Press (From Add Intent)");
                 //Strings to store the information from the text boxes
                 String u = et_j_a_uname.getText().toString();
                 String f = et_j_a_fname.getText().toString();
@@ -80,7 +80,7 @@ public class Add extends AppCompatActivity
 
 
                 //Make sure none of the text boxes are empty
-                if (u == null || f == null || l == null || p == null || e == null || a == null)
+                if (u.equals("")|| f.equals("") || l.equals("") || p.equals("") || e.equals("") || a.equals(""))
                 {
                     //If any text box is empty, show error
                     tv_j_a_emptyError.setVisibility(View.VISIBLE);
@@ -135,7 +135,7 @@ public class Add extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Log.d("Button Pressed: ", "Back Button Press (Add Intent)");
+                Log.d("Button Pressed: ", "Back Button Press (From Add Intent)");
                 startActivity(mainActivity);
 
             }

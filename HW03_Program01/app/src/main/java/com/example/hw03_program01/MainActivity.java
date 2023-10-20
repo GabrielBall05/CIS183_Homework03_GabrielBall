@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -19,17 +20,23 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
 {
+    //GUI stuff
     Button btn_j_add;
     Button btn_j_update;
     ListView lv_j_employees;
 
+    //Database stuff
     DatabaseHelper dbHelper;
 
+    //Array stuff
     ArrayList<Employee> listOfEmployees;
 
     //Intent stuff
     Intent addIntent;
+    Intent deleteIntent;
 
+    //Adapter stuff
+    EmployeeListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -52,14 +59,30 @@ public class MainActivity extends AppCompatActivity
 
         //Intent stuff
         addIntent = new Intent(MainActivity.this, Add.class);
+        deleteIntent = new Intent(MainActivity.this, Delete.class);
+        //===========
+        //From delete
+        Intent cameFrom = getIntent();
+        boolean answer = (boolean) cameFrom.getBooleanExtra("Answer", false);
+        Employee employeeToDelete = (Employee) cameFrom.getSerializableExtra("EmployeeToDelete");
+        if (answer)
+        {
+            deleteEmployee(employeeToDelete);
+        }
+        //===========
 
+
+
+        //For testing
+        Log.d("ArrayList size: ", listOfEmployees.size() + "");
+        logEmployees();
 
         //Functions
         addEmployeeButtonCLick();
-        deleteUserEvent();
-        updateUserEvent();
+        deleteEmployeeEvent();
+        updateEmployeeEvent();
         detailedViewEvent();
-        logEmployees();
+        fillListView();
     }
 
     public void addEmployeeButtonCLick()
@@ -69,7 +92,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                //Log.d("Button Pressed: ", "Add Employee Button Click");
+                Log.d("Button Pressed: ", "Add Employee Button Click (From MA Intent)");
                 //Take to add employee intent
                 addIntent.putExtra("EmployeeList", listOfEmployees);
 
@@ -78,32 +101,45 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    public void updateUserEvent()
+    public void updateEmployeeEvent()
     {
         btn_j_update.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                Log.d("Button Pressed: ", "Update Employee Button Click");
+                Log.d("Button Pressed: ", "Update Employee Button Click (From MA Intent)");
                 //Take to update employee intent
             }
         });
     }
 
-    public void deleteUserEvent()
+    public void deleteEmployeeEvent()
     {
         lv_j_employees.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
         {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l)
             {
-                Log.d("ListView Item Long Click: ", "Will delete employee #" + i + " in ListView");
-                //Deletes employee
+                Log.d("ListView Item Long Click (From MA Intent): ", "Will delete employee #" + i + " in ListView");
+
+                deleteIntent.putExtra("Employee", listOfEmployees.get(i));
+                startActivity(deleteIntent);
 
                 return false;
             }
         });
+    }
+
+    public void deleteEmployee(Employee e)
+    {
+        //Delete employee
+        dbHelper.deleteEmployee(e.getUname());
+
+        listOfEmployees = dbHelper.getAllRows();
+
+        //Update list view
+        fillListView();
     }
 
     public void detailedViewEvent()
@@ -113,10 +149,16 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
             {
-                Log.d("ListView Item Selected: ", "Clicked on employee #" + i + " in ListView");
+                Log.d("ListView Item Selected (From MA Intent): ", "Clicked on employee #" + i + " in ListView");
                 //Take to detailed view intent
             }
         });
+    }
+
+    public void fillListView()
+    {
+        adapter = new EmployeeListAdapter(this, listOfEmployees);
+        lv_j_employees.setAdapter(adapter);
     }
 
     public void logEmployees()
