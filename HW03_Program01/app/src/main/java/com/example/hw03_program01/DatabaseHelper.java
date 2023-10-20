@@ -106,7 +106,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return listEmployees;
     }
 
-    public void addNewUser(Employee e)
+    public void addNewEmployee(Employee e)
     {
         //Get writable
         SQLiteDatabase db = this.getWritableDatabase();
@@ -114,4 +114,6 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.execSQL("INSERT INTO " + TABLE_NAME + " VALUES ('" + e.getUname() + "','" + e.getFname() + "','" + e.getLname() + "','" + e.getPassword() + "','" + e.getEmail() + "','" + e.getAge() + "');");
         db.close();
     }
+
+
 }

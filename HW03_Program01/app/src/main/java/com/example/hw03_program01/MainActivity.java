@@ -7,6 +7,7 @@ package com.example.hw03_program01;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,8 +23,12 @@ public class MainActivity extends AppCompatActivity
     Button btn_j_update;
     ListView lv_j_employees;
 
+    DatabaseHelper dbHelper;
 
     ArrayList<Employee> listOfEmployees;
+
+    //Intent stuff
+    Intent addIntent;
 
 
     @Override
@@ -37,8 +42,16 @@ public class MainActivity extends AppCompatActivity
         btn_j_update = findViewById(R.id.btn_v_update);
         lv_j_employees = findViewById(R.id.lv_v_employees);
 
+        //Database Helper stuff
+        dbHelper = new DatabaseHelper(this);
+
         //Make arraylist
         listOfEmployees = new ArrayList<Employee>();
+        //Fill data from database into arraylist
+        listOfEmployees = dbHelper.getAllRows();
+
+        //Intent stuff
+        addIntent = new Intent(MainActivity.this, Add.class);
 
 
         //Functions
@@ -46,6 +59,7 @@ public class MainActivity extends AppCompatActivity
         deleteUserEvent();
         updateUserEvent();
         detailedViewEvent();
+        logEmployees();
     }
 
     public void addEmployeeButtonCLick()
@@ -57,6 +71,9 @@ public class MainActivity extends AppCompatActivity
             {
                 //Log.d("Button Pressed: ", "Add Employee Button Click");
                 //Take to add employee intent
+                addIntent.putExtra("EmployeeList", listOfEmployees);
+
+                startActivity(addIntent);
             }
         });
     }
@@ -100,5 +117,13 @@ public class MainActivity extends AppCompatActivity
                 //Take to detailed view intent
             }
         });
+    }
+
+    public void logEmployees()
+    {
+        for (int i = 0; i < listOfEmployees.size(); i++)
+        {
+            Log.d("Employee #" + i, listOfEmployees.get(i).getUname() + ": " + listOfEmployees.get(i).getLname() + ", " + listOfEmployees.get(i).getFname());
+        }
     }
 }
