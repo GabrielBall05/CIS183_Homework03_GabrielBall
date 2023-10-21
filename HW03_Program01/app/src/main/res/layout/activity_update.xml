@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Update">
+
+    <TextView
+        android:id="@+id/tv_v_u_dne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="22dp"
+        android:text="*Employee does not exist*"
+        android:textColor="#FF0000"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_v_u_fname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="32dp"
+        android:text="Update:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/et_v_u_uname"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:text="Username:"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_v_u_uname"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/et_v_u_uname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="22dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/textView19"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <EditText
+        android:id="@+id/et_v_u_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="text"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/et_v_u_email"
+        app:layout_constraintStart_toStartOf="@+id/et_v_u_email"
+        app:layout_constraintTop_toBottomOf="@+id/et_v_u_email" />
+
+    <TextView
+        android:id="@+id/tv_v_u_fname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="First Name:"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_v_u_fname"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/et_v_u_fname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginBottom="33dp"
+        android:ems="10"
+        android:inputType="text"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/et_v_u_lname"
+        app:layout_constraintStart_toEndOf="@+id/tv_v_u_fname" />
+
+    <TextView
+        android:id="@+id/tv_v_u_lname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="Last Name:"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_v_u_lname"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/et_v_u_lname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="265dp"
+        android:ems="10"
+        android:inputType="text"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/tv_v_u_lname"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_v_u_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="Password:"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_v_u_password"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/et_v_u_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:inputType="text"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/tv_v_u_password"
+        app:layout_constraintTop_toBottomOf="@+id/et_v_u_lname" />
+
+    <TextView
+        android:id="@+id/tv_v_u_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="Email:"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_v_u_email"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/et_v_u_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:ems="10"
+        android:inputType="text"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/et_v_u_password"
+        app:layout_constraintTop_toBottomOf="@+id/et_v_u_password" />
+
+    <TextView
+        android:id="@+id/tv_v_u_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="21dp"
+        android:text="Age:"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tv_v_u_emptyError"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_v_u_update"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="92dp"
+        android:text="Update"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_v_u_emptyError" />
+
+    <Button
+        android:id="@+id/btn_v_u_back"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="20dp"
+        android:text="Back"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_v_u_update" />
+
+    <Button
+        android:id="@+id/btn_v_u_check"
+        android:layout_width="275dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginEnd="68dp"
+        android:text="Check if employee exists"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_v_u_dne"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_v_u_uname" />
+
+    <TextView
+        android:id="@+id/tv_v_u_emptyError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="17dp"
+        android:text="*Make sure all text boxes stay filled out*"
+        android:textColor="#FF0000"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/et_v_u_age"
+        app:layout_constraintTop_toBottomOf="@+id/et_v_u_age" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

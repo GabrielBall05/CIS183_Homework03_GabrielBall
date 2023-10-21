@@ -112,7 +112,8 @@ public class Add extends AppCompatActivity
                         dbHelper.addNewEmployee(employeeToAdd);
                         //When we return to Main Activity, it will read all rows in database in onCreate and store this new employee
 
-                        //Load Main Activity
+                        //When I get back to MainActivity here, the listView and ArrayList will be updated because
+                        //in the onCreate function of MainActivity, it calls dbHelper in there to fill it in for me
                         startActivity(mainActivity);
                         //No need to clear text boxes since unless I decide to change it to not load main activity after adding one
                         //If I change it, it would allow you to add multiple employees before clicking "back" to go back to main intent

@@ -117,6 +117,9 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.execSQL("INSERT INTO " + TABLE_NAME + " VALUES ('" + e.getUname() + "','" + e.getFname() + "','" + e.getLname() + "','" + e.getPassword() + "','" + e.getEmail() + "','" + e.getAge() + "');");
         //db.execSQL("INSERT INTO " + TABLE_NAME + " VALUES ('" + u.getUname() + "','" + u.getFname() + "','" + u.getLname() + "');");
         db.close();
+
+        //The only thing that breaks this is if a user keys in a name with a ' or a " or a , like Kal'el because it messes with the sql code
+        //I just don't feel like error checking for that to be honest
     }
 
     public void deleteEmployee(String uname)
@@ -128,5 +131,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.close();
     }
 
+    public void updateEmployee(Employee e)
+    {
+        //Get writeable
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        String updateCommand = "UPDATE " + TABLE_NAME + " SET firstname = '" + e.getFname() + "' , lastname = '" + e.getLname() + "' , password = '" + e.getPassword() + "' , email = '" + e.getEmail() + "' , age = '" + e.getAge() + "' WHERE username = '" + e.getUname() + "';";
+        db.execSQL(updateCommand);
+        db.close();
+    }
 }

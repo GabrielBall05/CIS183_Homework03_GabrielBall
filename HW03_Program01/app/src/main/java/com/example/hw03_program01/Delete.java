@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ public class Delete extends AppCompatActivity
     Employee emp;
 
     Intent mainActivity;
+    DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,6 +29,8 @@ public class Delete extends AppCompatActivity
         tv_j_d_areYouSure = findViewById(R.id.tv_v_d_areYouSure);
         btn_j_d_yes = findViewById(R.id.btn_v_d_yes);
         btn_j_d_no = findViewById(R.id.btn_v_d_no);
+
+        dbHelper = new DatabaseHelper(this);
 
         //Intent stuff
         mainActivity = new Intent(Delete.this, MainActivity.class);
@@ -49,9 +53,11 @@ public class Delete extends AppCompatActivity
             {
                 Log.d("Button Pressed: ", "'Yes' Button Pressed (From Delete Intent)");
 
-                mainActivity.putExtra("Answer", true);
-                mainActivity.putExtra("EmployeeToDelete", emp);
+                //Delete employee
+                dbHelper.deleteEmployee(emp.getUname());
 
+                //When I get back to MainActivity, the listView and ArrayList will be updated because
+                //in the onCreate function of MainActivity, it calls dbHelper in there to fill it in for me
                 startActivity(mainActivity);
             }
         });

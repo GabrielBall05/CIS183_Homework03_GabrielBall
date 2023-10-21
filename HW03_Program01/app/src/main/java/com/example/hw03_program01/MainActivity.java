@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity
     //Intent stuff
     Intent addIntent;
     Intent deleteIntent;
+    Intent detailsIntent;
+    Intent updateIntent;
 
     //Adapter stuff
     EmployeeListAdapter adapter;
@@ -60,18 +62,9 @@ public class MainActivity extends AppCompatActivity
         //Intent stuff
         addIntent = new Intent(MainActivity.this, Add.class);
         deleteIntent = new Intent(MainActivity.this, Delete.class);
-        //===========
-        //From delete
+        detailsIntent = new Intent(MainActivity.this, Details.class);
+        updateIntent = new Intent(MainActivity.this, Update.class);
         Intent cameFrom = getIntent();
-        boolean answer = (boolean) cameFrom.getBooleanExtra("Answer", false);
-        Employee employeeToDelete = (Employee) cameFrom.getSerializableExtra("EmployeeToDelete");
-        if (answer)
-        {
-            deleteEmployee(employeeToDelete);
-        }
-        //===========
-
-
 
         //For testing
         Log.d("ArrayList size: ", listOfEmployees.size() + "");
@@ -110,6 +103,8 @@ public class MainActivity extends AppCompatActivity
             {
                 Log.d("Button Pressed: ", "Update Employee Button Click (From MA Intent)");
                 //Take to update employee intent
+                updateIntent.putExtra("EmployeeList", listOfEmployees);
+                startActivity(updateIntent);
             }
         });
     }
@@ -131,17 +126,6 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    public void deleteEmployee(Employee e)
-    {
-        //Delete employee
-        dbHelper.deleteEmployee(e.getUname());
-
-        listOfEmployees = dbHelper.getAllRows();
-
-        //Update list view
-        fillListView();
-    }
-
     public void detailedViewEvent()
     {
         lv_j_employees.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -151,6 +135,8 @@ public class MainActivity extends AppCompatActivity
             {
                 Log.d("ListView Item Selected (From MA Intent): ", "Clicked on employee #" + i + " in ListView");
                 //Take to detailed view intent
+                detailsIntent.putExtra("Employee", listOfEmployees.get(i));
+                startActivity(detailsIntent);
             }
         });
     }
